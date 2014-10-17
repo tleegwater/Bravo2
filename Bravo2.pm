@@ -67,7 +67,6 @@ sub status {
     #print "bravo: ".$array[70]."\n";          # I=idle, B=busy, C=cover open
     #print "printertray: ".$array[71]."\n";    # I=closed, O=open, D=disk insterted, X=no disk? 
     #print "picker: ".$array[72]."\n";         # X=no disk, O=grabbed disk
-    #print "\n";
   }
 
   return $buf;
