@@ -8,7 +8,7 @@ use IPC::Run qw( start );
 my $bravo2 = Bravo2->new();
 
 	$bravo2->resetDevice;
-	#sleep 15;
+	sleep 15;
 	#$bravo2->sendCommand('0x05');
 	
 	#my $driveno = `drutil list|grep USB|cut -d" " -f1`;
