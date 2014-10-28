@@ -12,13 +12,13 @@ my $bravo2 = Bravo2->new();
 	#$bravo2->sendCommand('0x05');
 	
 	#my $driveno = `drutil list|grep USB|cut -d" " -f1`;
-	my $driveno = `lsblk|grep rom|cut -d" " -f1`;
-	chomp($driveno);
+		#my $driveno = `lsblk|grep rom|cut -d" " -f1`;
+		#chomp($driveno);
 
-	print "Drive: ".$driveno."\n";
+		#print "Drive: ".$driveno."\n";
 	
 	#system("drutil", "-drive", $driveno, "tray", "eject");
-	system('cdeject', '/dev/'. $driveno);
+		#system('cdeject', '/dev/'. $driveno);
 	
 	
 	#$bravo2->sendCommand('0x80'); #get left put in drive (stays busy) 

@@ -15,11 +15,10 @@ sub new {
   my $class = shift;
   my $usb = Device::USB->new();
   my $dev = $usb->find_device( 0x0f25, 0x0008 );
-
+  print "Claim ".$dev->claim_interface(0)."\n";
+  
   $dev->open() || die "$!";
   $dev->set_configuration(1);
-  $dev->claim_interface(0);
-
   my $self = {};
   $self->{dev} = $dev;
   print "Connected: ", $dev->manufacturer(), " ", $dev->product(), "\n";
@@ -44,7 +43,7 @@ sub sendCommand {
   $cmdString .= chr ($sum % 255);
   print "Sending: ".unpack 'H*', $cmdString;
   print "\n";
-  $self->{dev}->bulk_write(0x02, $cmdString, $timeout);
+  $self->{dev}->bulk_write(0x02, $cmdString, $timeout) || die "$!";
   sleep 1;
   while (1) { 
   if (! $self->busy()) {
