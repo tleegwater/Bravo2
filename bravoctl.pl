@@ -11,21 +11,29 @@ for (my $i=1; $i <= 1; $i++) {
 
 
 
-	$bravo2->sendCommand('0x05');
+	$bravo2->resetDevice;
 	#sleep 15;
 	#$bravo2->sendCommand('0x05');
-	my $driveno = `drutil list|grep USB|cut -d" " -f1`;
 	
+	#my $driveno = `drutil list|grep USB|cut -d" " -f1`;
+	my $driveno = `lsblk|grep rom|cut -d" " -f1`;
+
+
 	print "Drive: ".$driveno."\n";
-	system("drutil", "-drive", $driveno, "tray", "eject");
 	
+	#system("drutil", "-drive", $driveno, "tray", "eject");
+	system('cdeject', '/dev/'. $driveno);
 	
 	
 	#$bravo2->sendCommand('0x80'); #get left put in drive (stays busy) 
 	#$bravo2->sendCommand('0x81'); #get left, put in printer
 	#$bravo2->sendCommand('0x82'); #get left, put right
 	$bravo2->sendCommand('0x83'); #get right, put in drive
+	
+
 	system("drutil", "-drive", $driveno, "tray", "close");
+	system('cdclose', '/dev/'. $driveno);
+
 	sleep 30;
 	my $partno = `df -lH|grep "100%"|grep -v "MobileBackups"|cut -d" " -f1|head -1`;
 	chomp($partno);

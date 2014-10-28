@@ -72,6 +72,14 @@ sub status {
   return $buf;
 }
 
+sub resetDevice {
+  my $self = shift;
+  $self->sendCommand('0x05');
+  return 1;
+}
+
+
+
 sub busy {
   my $self = shift;
   my $buf = '';
